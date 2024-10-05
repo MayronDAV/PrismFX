@@ -1,0 +1,12 @@
+[submodule "PrismFX/thirdparty/glfw"]
+	path = PrismFX/thirdparty/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "PrismFX/thirdparty/glad"]
+	path = PrismFX/thirdparty/glad
+	url = https://github.com/MayronDAV/glad.git
+[submodule "PrismFX/thirdparty/glm"]
+	path = PrismFX/thirdparty/glm
+	url = https://github.com/g-truc/glm.git
+[submodule "PrismFX/thirdparty/spdlog"]
+	path = PrismFX/thirdparty/spdlog
+	url = https://github.com/gabime/spdlog.git
