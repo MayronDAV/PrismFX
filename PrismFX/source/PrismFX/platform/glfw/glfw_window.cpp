@@ -91,7 +91,32 @@ namespace PFX
 			}
 		}
 
-		m_Window = glfwCreateWindow((int)p_info.Width, (int)p_info.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		int width = (int)p_info.Width;
+		int height = (int)p_info.Height;
+		GLFWmonitor* monitor = nullptr;
+
+		switch (p_info.Mode)
+		{
+			case WindowMode::BORDERLESS:
+			{
+				GLFWmonitor* primaryMonitor = glfwGetPrimaryMonitor();		
+				const GLFWvidmode* mode = glfwGetVideoMode(primaryMonitor);
+				width = mode->width;
+				height = mode->height;
+				glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
+				break;
+			}
+			case WindowMode::FULLSCREEN:
+			{
+				monitor = glfwGetPrimaryMonitor();
+				const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+				break;
+			}
+			default:
+				break;
+		};
+
+		m_Window = glfwCreateWindow(width, height, m_Data.Title.c_str(), monitor, nullptr);
 		PFX_CORE_ASSERT(m_Window, "Could not create the window!");
 		m_Context = GraphicsContext::Create(m_Window);
 		m_Context->Init();

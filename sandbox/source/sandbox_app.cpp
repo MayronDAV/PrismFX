@@ -53,6 +53,7 @@ class Sandbox : public PFX::Application
 			wci.Title = "SandboxApp";
 			wci.Width = 640;
 			wci.Height = 480;
+			wci.Mode = PFX::WindowMode::FULLSCREEN;
 			PFX::Window* window = PFX::Window::Create(wci);
 
 			SetWindow(window);
