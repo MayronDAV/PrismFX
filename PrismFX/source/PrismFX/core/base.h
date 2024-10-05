@@ -16,3 +16,6 @@
 	//#error Currently only supports Windows and Linux
 	#define PFX_API
 #endif
+
+
+#define BIT(x) (1 << x)
