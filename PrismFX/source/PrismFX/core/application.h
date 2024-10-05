@@ -1,6 +1,7 @@
 #pragma once
 #include "PrismFX/core/base.h"
 
+#include "PrismFX/core/definitions.h"
 #include "PrismFX/events/event.h"
 #include "PrismFX/events/application_event.h"
 
@@ -12,7 +13,7 @@ namespace PFX
 	class PFX_API Application
 	{
 		public:
-			Application();
+			Application(RenderAPI p_api = RenderAPI::OpenGL);
 			virtual ~Application();
 
 			void Init();

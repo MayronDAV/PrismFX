@@ -9,6 +9,7 @@
 
 
 
+
 namespace PFX
 {
 	struct Flag
@@ -59,7 +60,7 @@ namespace PFX
 	void GLFWWindow::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
+		m_Context->SwapBuffer();
 	}
 
 	void GLFWWindow::SetCursorMode(CursorMode p_mode)
@@ -84,10 +85,6 @@ namespace PFX
 			glfwSetErrorCallback(GLFWErrorCallback);
 		}
 
-		// glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-		// glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-		// glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
 		for (const auto& flag : s_WindowFlags)
 		{
 			if (p_info.Flags & flag.Flag)
@@ -98,9 +95,10 @@ namespace PFX
 
 		m_Window = glfwCreateWindow((int)p_info.Width, (int)p_info.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		PFX_CORE_ASSERT(m_Window, "Could not create the window!");
+		m_Context = GraphicsContext::Create(m_Window);
+		m_Context->Init();
 		++s_GLFWWindowCount;
 
-		glfwMakeContextCurrent(m_Window);
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 
 		// Set GLFW callbacks
@@ -211,6 +209,8 @@ namespace PFX
 	void GLFWWindow::Shutdown() noexcept
 	{
 		PFX_CORE_WARN("{} window shutdown", m_Data.Title)
+		delete m_Context;
+		m_Context = nullptr;
 		glfwDestroyWindow(m_Window);
 		--s_GLFWWindowCount;
 
@@ -224,7 +224,7 @@ namespace PFX
 	{
 		PFX_CORE_TRACE("Set vsync {}", p_enabled)
 		m_Data.Vsync = p_enabled;
-		glfwSwapInterval((p_enabled) ? 1 : 0);
+		m_Context->SetVsync(p_enabled);
 	}
 
 	bool GLFWWindow::IsVsync() const

@@ -1,8 +1,10 @@
 #pragma once
 
 #include "PrismFX/core/window.h"
+#include "PrismFX/renderer/graphics_context.h"
 
 // Lib
+#define GLFW_INCLUDE_NONE
 #include <glfw/glfw3.h>
 
 
@@ -35,6 +37,7 @@ namespace PFX
 
 		private:
 			GLFWwindow* m_Window = nullptr;
+			GraphicsContext* m_Context = nullptr;
 
 			struct WindowData
 			{

@@ -4,11 +4,15 @@
 
 #include "PrismFX/scene/scene_manager.h"
 
+#include "PrismFX/core/engine.h"
+
+
 
 namespace PFX
 {
-	Application::Application()
+	Application::Application(RenderAPI p_api)
 	{
+		Engine::SetAPI(p_api);
 		SceneManager::Init();
 	}
 
