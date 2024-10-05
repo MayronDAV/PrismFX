@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
 if(NOT DEFINED CMAKE_BUILD_TYPE)
 	set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type")
@@ -59,9 +59,11 @@ include_directories(${GAME_INCLUDE_DIRS})
 
 add_library(${PROJECT_NAME} SHARED ${SOURCES} ${GLAD_SOURCES})
 
-set_target_properties(${GAME_LIBRARY} PROPERTIES 
+set_target_properties(${GAME_LIBRARY} PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Bin"
 )
+
+target_precompile_headers(${GAME_LIBRARY} PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/source/PrismFX/pfx_pch.h>")
 
 target_link_libraries(${PROJECT_NAME} ${GAME_LIBRARIES})
 

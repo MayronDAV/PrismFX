@@ -3,8 +3,8 @@
 #include "PrismFX/core/base.h"
 
 // Lib
-#include "spdlog/spdlog.h"
-#include "spdlog/fmt/ostr.h"
+#include <spdlog/spdlog.h>
+#include <spdlog/fmt/ostr.h>
 
 
 

@@ -1,10 +1,8 @@
-#include "PrismFX/core/log.h"
+#include "PrismFX/pfx_pch.h"
+#include "PrismFX/core/log.h" // Just to be clear
 
 // Lib
-#include "spdlog/sinks/stdout_color_sinks.h"
-
-// std
-#include <memory>
+#include <spdlog/sinks/stdout_color_sinks.h>
 
 
 

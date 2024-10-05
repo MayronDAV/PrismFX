@@ -1,11 +1,7 @@
 #pragma once
 
+#include "PrismFX/pfx_pch.h"
 #include "PrismFX/core/base.h"
-
-// std
-#include <string>
-#include <sstream>
-#include <functional>
 
 
 

@@ -2,10 +2,6 @@
 
 #include "PrismFX/events/event.h"
 
-// std
-#include <filesystem>
-#include <vector>
-
 
 
 namespace PFX

@@ -1,8 +1,5 @@
+#include "PrismFX/pfx_pch.h"
 #include "PrismFX/core/application.h"
-#include "PrismFX/core/log.h"
-
-// std
-#include <iostream>
 
 
 namespace PFX
