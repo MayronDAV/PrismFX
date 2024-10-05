@@ -1,8 +1,6 @@
 #include "PrismFX/pfx_pch.h"
 #include "opengl_context.h"
 
-#include "PrismFX/core/asserts.h"
-
 // Lib
 #include <glad/glad.h>
 

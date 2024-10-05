@@ -1,6 +1,7 @@
 #pragma once
 
 #include "PrismFX/core/log.h"
+#include "PrismFX/core/asserts.h"
 
 // std
 #include <iostream>

@@ -24,7 +24,17 @@ class SceneTest : public PFX::Scene
 
 		void OnUpdate() override
 		{
+			if (PFX::Input::IsKeyPressed(PFX::Key::W))
+			{
+				std::cout << "W is pressed!\n";
+			}
 
+			if (PFX::Input::IsMouseButtonPressed(PFX::Mouse::BLeft))
+			{
+				std::cout << "BLeft is pressed!\n";
+			}
+
+			std::cout << "X: " << PFX::Input::GetMouseX() << " Y: " << PFX::Input::GetMouseY() << "\n";
 		}
 
 		void OnEvent(PFX::Event& p_event) override

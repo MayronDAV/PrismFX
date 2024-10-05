@@ -5,8 +5,6 @@
 #include "PrismFX/events/mouse_event.h"
 #include "PrismFX/events/key_event.h"
 
-#include "PrismFX/core/asserts.h"
-
 
 
 

@@ -13,3 +13,5 @@
 #include "PrismFX/scene/scene.h"
 #include "PrismFX/scene/scene_stack.h"
 #include "PrismFX/scene/scene_manager.h"
+
+#include "PrismFX/core/input.h"

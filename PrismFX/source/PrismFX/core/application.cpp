@@ -1,10 +1,10 @@
 #include "PrismFX/pfx_pch.h"
 #include "PrismFX/core/application.h"
-#include "PrismFX/core/asserts.h"
 
 #include "PrismFX/scene/scene_manager.h"
 
 #include "PrismFX/core/engine.h"
+#include "PrismFX/core/input.h"
 
 
 
@@ -26,6 +26,8 @@ namespace PFX
 	{
 		PFX_CORE_ASSERT(m_Window, "Must be called SetWindow()!");
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+
+		Input::Init(m_Window->GetNativeWindow());
 	}
 
 	void Application::Run()

@@ -11,6 +11,11 @@ namespace PFX
 		None = 0, OpenGL = 1 // For now it's just opengl
 	};
 
+	enum class WindowAPI
+	{
+		None = 0, GLFW = 1 // For now it's just GLFW
+	};
+
 	enum WindowFlag : uint8_t
 	{
 		WINDOW_FLAG_NONE = 0,
