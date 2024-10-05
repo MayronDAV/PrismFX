@@ -14,6 +14,7 @@ int main(int argc, char** argv)
 	PFX::Log::Init();
 
 	auto app = PFX::CreateApplication();
+	app->Init();
 	app->Run();
 	delete app;
 }

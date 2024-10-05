@@ -57,20 +57,26 @@ list(APPEND GAME_LIBRARIES spdlog)
 
 include_directories(${GAME_INCLUDE_DIRS})
 
-add_library(${PROJECT_NAME} SHARED ${SOURCES} ${GLAD_SOURCES})
+if(MSVC)
+    add_compile_options(/Wv:2)
+elseif(UNIX)
+    add_compile_options(-Wno-dll-interface)
+endif()
+
+add_library(${GAME_LIBRARY} SHARED ${SOURCES} ${GLAD_SOURCES})
+
+target_precompile_headers(${GAME_LIBRARY} PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/source/PrismFX/pfx_pch.h>")
+
+target_compile_definitions(${GAME_LIBRARY} PRIVATE PFX_BUILD)
+if(WIN32)
+	target_compile_definitions(${GAME_LIBRARY} PRIVATE PFX_PLATFORM_WINDOWS)
+elseif(UNIX)
+	target_compile_definitions(${GAME_LIBRARY} PRIVATE PFX_PLATFORM_UNIX)
+endif()
 
 set_target_properties(${GAME_LIBRARY} PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Bin"
 )
 
-target_precompile_headers(${GAME_LIBRARY} PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/source/PrismFX/pfx_pch.h>")
-
-target_link_libraries(${PROJECT_NAME} ${GAME_LIBRARIES})
-
-target_compile_definitions(${PROJECT_NAME} PRIVATE PFX_BUILD)
-if(WIN32)
-	target_compile_definitions(${PROJECT_NAME} PRIVATE PFX_PLATFORM_WINDOWS)
-elseif(UNIX)
-	target_compile_definitions(${PROJECT_NAME} PRIVATE PFX_PLATFORM_UNIX)
-endif()
+target_link_libraries(${GAME_LIBRARY} ${GAME_LIBRARIES})
 #============================================================================
