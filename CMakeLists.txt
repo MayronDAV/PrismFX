@@ -21,4 +21,4 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_subdirectory(PrismFX)
 
-add_subdirectory(Sandbox)
+add_subdirectory(sandbox)

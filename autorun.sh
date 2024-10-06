@@ -12,4 +12,4 @@ make
 
 cd ..
 
-./sandbox/Bin/Debug/Sandbox
+./sandbox/Bin/Sandbox

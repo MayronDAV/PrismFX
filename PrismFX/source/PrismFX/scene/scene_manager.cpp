@@ -10,8 +10,8 @@ namespace PFX
 {
 	struct Data
 	{
-		Scene* Scene = nullptr;
-		SceneStack m_Stack;
+		Scene* SceneObj = nullptr;
+		SceneStack Stack;
 		LoadMode Mode = LoadMode::Singular;
 	};
 	static Data* s_Data = nullptr;
@@ -24,13 +24,13 @@ namespace PFX
 
 	void SceneManager::Shutdown() noexcept
 	{
-		if (s_Data->Scene)
+		if (s_Data->SceneObj)
 		{
-			s_Data->Scene->OnDetach();
-			delete s_Data->Scene;
+			s_Data->SceneObj->OnDetach();
+			delete s_Data->SceneObj;
 		}
 
-		s_Data->m_Stack.Destroy();
+		s_Data->Stack.Destroy();
 
 		delete s_Data;
 	}
@@ -39,33 +39,33 @@ namespace PFX
 	{
 		s_Data->Mode = p_mode;
 
-		if (s_Data->Scene) 
+		if (s_Data->SceneObj) 
 		{
-			s_Data->Scene->OnDetach();
-			delete s_Data->Scene;
-			s_Data->Scene = nullptr;
+			s_Data->SceneObj->OnDetach();
+			delete s_Data->SceneObj;
+			s_Data->SceneObj = nullptr;
 		}
 
 		if (p_mode == LoadMode::Additive)
 		{
-			s_Data->m_Stack.PushScene(p_scene);
+			s_Data->Stack.PushScene(p_scene);
 			p_scene->OnAttach();
 			return;
 		}
 
-		s_Data->Scene = p_scene;
-		s_Data->Scene->OnAttach();
+		s_Data->SceneObj = p_scene;
+		s_Data->SceneObj->OnAttach();
 	}
 
 	void SceneManager::OnUpdate()
 	{
 		if (s_Data->Mode == LoadMode::Singular)
 		{
-			s_Data->Scene->OnUpdate();
+			s_Data->SceneObj->OnUpdate();
 		}
 		else if (s_Data->Mode == LoadMode::Additive)
 		{
-			for (const auto& scene : s_Data->m_Stack)
+			for (const auto& scene : s_Data->Stack)
 			{
 				scene->OnUpdate();
 			}
@@ -76,11 +76,11 @@ namespace PFX
 	{
 		if (s_Data->Mode == LoadMode::Singular)
 		{
-			s_Data->Scene->OnEvent(p_event);
+			s_Data->SceneObj->OnEvent(p_event);
 		}
 		else if (s_Data->Mode == LoadMode::Additive)
 		{
-			for (const auto& scene : s_Data->m_Stack)
+			for (const auto& scene : s_Data->Stack)
 			{
 				scene->OnEvent(p_event);
 			}
@@ -89,7 +89,7 @@ namespace PFX
 
 	void SceneManager::ClearSceneStack()
 	{
-		s_Data->m_Stack.Destroy();
+		s_Data->Stack.Destroy();
 	}
 
 } // PFX

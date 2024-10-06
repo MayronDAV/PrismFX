@@ -49,6 +49,7 @@ add_subdirectory("${THIRDPARTY_DIR}/glm")
 list(APPEND GAME_LIBRARIES glm-header-only)
 
 # SPDLOG setup
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 add_subdirectory("${THIRDPARTY_DIR}/spdlog")
 list(APPEND GAME_LIBRARIES spdlog)
 #============================================================================

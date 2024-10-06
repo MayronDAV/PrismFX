@@ -41,18 +41,18 @@ target_link_libraries(${PROJECT_NAME} PrismFX)
 
 #========================== COPY SHARED LIBRARY =============================
 
-set(SANDBOX_BIN_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Bin/${CMAKE_BUILD_TYPE}")
-
 if(WIN32)
+	set(SANDBOX_BIN_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Bin/${CMAKE_BUILD_TYPE}")
 	add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy_if_different
 		"${PRISMFX_DIR}/Bin/${CMAKE_BUILD_TYPE}/PrismFX.dll"
 		"${SANDBOX_BIN_DIR}/PrismFX.dll"
 	)
 elseif(UNIX)
+	set(SANDBOX_BIN_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Bin")
 	add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy_if_different
-		"${PRISMFX_DIR}/Bin/${CMAKE_BUILD_TYPE}/libPrismFX.so"
+		"${CMAKE_SOURCE_DIR}/build/PrismFX/libPrismFX.so"
 		"${SANDBOX_BIN_DIR}/libPrismFX.so"
 	)
 endif()
